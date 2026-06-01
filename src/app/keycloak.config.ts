@@ -13,6 +13,11 @@ const localhostCondition = createInterceptorCondition<IncludeBearerTokenConditio
 
 });
 
+const buildAppUrl = (path: string) => {
+  const basePath = new URL(document.baseURI).pathname.replace(/\/$/, '');
+  return `${window.location.origin}${basePath}${path}`;
+};
+
 export const provideKeycloakAngular = () =>
   provideKeycloak({
     config: {
@@ -22,8 +27,8 @@ export const provideKeycloakAngular = () =>
     },
     initOptions: {
       onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
-      redirectUri: window.location.origin + '/',
+      silentCheckSsoRedirectUri: buildAppUrl('/silent-check-sso.html'),
+      redirectUri: buildAppUrl('/'),
     },
     features: [
       withAutoRefreshToken({
