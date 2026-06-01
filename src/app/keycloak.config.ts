@@ -9,14 +9,15 @@ import {
 } from 'keycloak-angular';
 
 const localhostCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
-  urlPattern: /^(http:\/\/localhost:8181)(\/.*)?$/i,
+  urlPattern: /^(https:\/\/erp\.proelectricos\.com\/api)(\/.*)?$/i,
+
 });
 
 export const provideKeycloakAngular = () =>
   provideKeycloak({
     config: {
-      realm: 'keycloak-angular-sandbox',
-      url: 'http://localhost:8080',
+      realm: 'MDSERP',
+      url: 'https://erp.proelectricos.com/keycloak',
       clientId: 'mds-erp-front',
     },
     initOptions: {
